@@ -1,0 +1,12 @@
+{
+  "C_Cpp.errorSquiggles": "enabled",
+  "cSpell.ignoreWords": [
+    "Cdefs",
+    "Clinear",
+    "Cpattern",
+    "Cpolygon",
+    "Crect",
+    "Cstop",
+    "Csvg"
+  ]
+}

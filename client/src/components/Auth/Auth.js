@@ -54,9 +54,7 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleLoginSuccess = async (res) => {
-    const token = res.getAuthResponse().id_token;
-    console.log(token);
+  const googleLoginSuccess = async (res) => { 
     const decoded_data = jwtDecode(res?.credential);
     console.log(decoded_data);
     try {

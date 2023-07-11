@@ -10,10 +10,9 @@ const auth = (req, res, next) => {
       decoded_data = jwt.verify(token, 'test');
       req.userId = decoded_data?.id;
     } else {
-      decoded_data = jwt(token);
+      decoded_data = decode(token);
       req.userId = decoded_data?.sub;
     }
-
     next();
   } catch (error) {
     console.log(error);

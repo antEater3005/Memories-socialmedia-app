@@ -21,14 +21,13 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyle();
   const user = JSON.parse(localStorage.getItem('profile'));
 
-  useEffect(() => {
-    console.log('HERE');
-  }, [dispatch]);
+  // console.log(user);
+  useEffect(() => {}, [dispatch]);
 
   const Likes = () => {
     if (post.likes.length > 0) {
       return post.likes.find(
-        (like) => like === (user?.userData?.googlId || user?.userData?._id)
+        (like) => like === (user?.userData?.sub || user?.userData?._id)
       ) ? (
         <>
           <ThumbUpAltIcon fontSize='small' />
@@ -105,12 +104,17 @@ const Post = ({ post, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {user?.userData?.googleId === post.creator ||
-          user?.userData?._id === post.creator}
+        {}
         <Button
           size='small'
           color='primary'
           onClick={() => dispatch(deletePost(post._id))}
+          disabled={
+            !(
+              user?.userData?.sub === post.creator ||
+              user?.userData?._id === post.creator
+            )
+          }
         >
           <DeleteIcon fontSize='small' />
           &nbsp;

@@ -54,11 +54,15 @@ const Auth = () => {
     setShowPassword(false);
   };
 
-  const googleLoginSuccess = async (res) => { 
+  const googleLoginSuccess = async (res) => {
+    console.log(res);
     const decoded_data = jwtDecode(res?.credential);
     console.log(decoded_data);
     try {
-      dispatch({ type: 'AUTH', payload: { userData: decoded_data } });
+      dispatch({
+        type: 'AUTH',
+        payload: { userData: decoded_data, token: res?.credential },
+      });
       navigate('/');
     } catch (error) {
       console.log(error);

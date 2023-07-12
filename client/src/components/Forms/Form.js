@@ -55,15 +55,15 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   if (!loggedInUser?.userData?.name) {
     return (
-      <Paper className={classes.paper}>
+      <Paper className={classes.paper} raised='true' elevation={6} >
         <Typography variant='h6' align='center'>
-          Please log in to create your owm memories and like other's memories.
+          Please log in to create your own memories and like other's memories.
         </Typography>
       </Paper>
     );
   }
   return (
-    <Paper className={`${classes.paper} ${classes.paper}`}>
+    <Paper className={`${classes.paper} ${classes.paper}`} raised='true' elevation={6}  >
       <form
         autoComplete='off'
         noValidate
@@ -97,7 +97,7 @@ const Form = ({ currentId, setCurrentId }) => {
           <TextField
             name='tags'
             variant='outlined'
-            label='Tags'
+            label='Tags(coma separated)'
             fullWidth
             value={postData.tags}
             onChange={(e) => {

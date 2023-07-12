@@ -92,13 +92,13 @@ const Post = ({ post, setCurrentId }) => {
       </Typography>
       <CardContent>
         <Typography variant='body2' color='textSecondary' component='p'>
-          {post.message}
+          {`${post.message.slice(0, 100)}...`}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button
           size='small'
-          color='primary'
+          color='primary' 
           onClick={() => dispatch(likePost(post._id))}
           disabled={!user?.userData}
         >

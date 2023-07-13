@@ -58,6 +58,7 @@ const Home = () => {
       navigate('/');
     }
   };
+  // useEffect(() => {}, [dispatch]);
 
   return (
     <Grow in>

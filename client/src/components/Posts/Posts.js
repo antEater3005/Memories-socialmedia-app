@@ -15,7 +15,9 @@ const Posts = ({ setCurrentId }) => {
   }
 
   return isLoading ? (
-    <CircularProgress size={75} />
+    <Paper elevation={6} className={classes.loadingPaper}>
+      <CircularProgress size='7em' />
+    </Paper>
   ) : (
     <Grid
       className={classes.mainContainer}

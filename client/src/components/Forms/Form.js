@@ -12,7 +12,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyle();
   const dispatch = useDispatch();
   const post = useSelector((state) =>
-    currentId ? state.posts.find((p) => p._id === currentId) : null
+    currentId ? state.posts.posts.find((p) => p._id === currentId) : null
   );
   const loggedInUser = JSON.parse(localStorage.getItem('profile'));
 
@@ -55,7 +55,7 @@ const Form = ({ currentId, setCurrentId }) => {
   };
   if (!loggedInUser?.userData?.name) {
     return (
-      <Paper className={classes.paper} raised='true' elevation={6} >
+      <Paper className={classes.paper} raised='true' elevation={6}>
         <Typography variant='h6' align='center'>
           Please log in to create your own memories and like other's memories.
         </Typography>
@@ -63,7 +63,11 @@ const Form = ({ currentId, setCurrentId }) => {
     );
   }
   return (
-    <Paper className={`${classes.paper} ${classes.paper}`} raised='true' elevation={6}  >
+    <Paper
+      className={`${classes.paper} ${classes.paper}`}
+      raised='true'
+      elevation={6}
+    >
       <form
         autoComplete='off'
         noValidate

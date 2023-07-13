@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardActions,
@@ -23,30 +23,45 @@ const Post = ({ post, setCurrentId }) => {
   const classes = useStyle();
   const user = JSON.parse(localStorage.getItem('profile'));
 
-  // console.log(user);
-  useEffect(() => {}, [dispatch]);
+  const [likes, setLikes] = useState(post?.likes);
+
+  const userId = user?.userData._id || user?.userData.sub;
+  const [hasLiked, setHasLiked] = useState(
+    likes.find((like) => like === userId)
+  );
+
+  const handleLike = async () => {
+    dispatch(likePost(post?._id));
+    if (hasLiked) {
+      setLikes(likes.filter((likeId) => likeId !== userId));
+    } else {
+      setLikes([...likes, userId]);
+    }
+    setHasLiked(!hasLiked);
+  };
+
   const navigate = useNavigate();
   const openPost = () => {
     navigate(`/posts/${post._id}`);
   };
 
   const Likes = () => {
-    if (post.likes.length > 0) {
-      return post.likes.find(
+    if (likes.length > 0) {
+      return likes.find(
         (like) => like === (user?.userData?.sub || user?.userData?._id)
       ) ? (
         <>
           <ThumbUpAltIcon fontSize='small' />
           &nbsp;
-          {post.likes.length > 2
-            ? `You and ${post.likes.length - 1} others`
-            : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+          {likes.length > 2
+            ? `You and ${likes.length - 1} others`
+            : `${likes.length} like${likes.length > 1 ? 's' : ''}`}
         </>
       ) : (
         <>
           <ThumbUpAltOutlined fontSize='small' />
           &nbsp;
-          {`${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}
+          {`${likes.length} like${likes.length > 1 ? 's' : ''}`}
         </>
       );
     }
@@ -60,13 +75,13 @@ const Post = ({ post, setCurrentId }) => {
 
   return (
     <Card className={classes.card} raised elevation={6}>
-    {/* not working */}
-      {/* <ButtonBase
+      {/* not working */}
+      <ButtonBase
         className={classes.cardActions}
         onClick={openPost}
         component='span'
         name='test'
-      ></ButtonBase> */}
+      ></ButtonBase>
       <CardMedia
         className={classes.media}
         image={
@@ -87,7 +102,7 @@ const Post = ({ post, setCurrentId }) => {
           style={{ color: 'white' }}
           size='small'
           onClick={(e) => {
-            e.stopPropagation();
+            // e.stopPropagation();
             setCurrentId(post._id);
           }}
         >
@@ -111,7 +126,7 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size='small'
           color='primary'
-          onClick={() => dispatch(likePost(post._id))}
+          onClick={handleLike}
           disabled={!user?.userData}
         >
           <Likes />

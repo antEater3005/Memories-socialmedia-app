@@ -25,11 +25,17 @@ const CommentSection = ({ post }) => {
         <Typography gutterBottom variant='h6'>
           Comments
         </Typography>
-        {comments.map((comm, idx) => (
-          <Typography key={idx} gutterBottom variant='subtitle1'>
-            <strong>{comm.split(':')[0]}</strong>: {comm.split(':')[1]}
+        {comments.length > 0 ? (
+          comments.map((comm, idx) => (
+            <Typography key={idx} gutterBottom variant='subtitle1'>
+              <strong>{comm.split(':')[0]}</strong>: {comm.split(':')[1]}
+            </Typography>
+          ))
+        ) : (
+          <Typography gutterBottom variant='h6'>
+            No Comments
           </Typography>
-        ))}
+        )}
         <div ref={commentsRef} />
       </div>
       {user ? (
@@ -58,7 +64,11 @@ const CommentSection = ({ post }) => {
             </Button>
           </Typography>
         </div>
-      ) : null}
+      ) : (
+        <Typography gutterBottom variant='h6'>
+          Login to comment.
+        </Typography>
+      )}
     </div>
   );
 };

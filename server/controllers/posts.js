@@ -30,8 +30,11 @@ export const getPostsBySearch = async (req, res) => {
   try {
     const title = new RegExp(searchQuery, 'i');
 
+    const escapedTags = tags.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const tagsRegex = new RegExp(escapedTags, 'i');
+
     const posts = await PostMessage.find({
-      $or: [{ title }, { tags: { $in: tags.split(',') } }],
+      $or: [{ title }, { tags: { $regex: tagsRegex } }],
     });
     res.status(200).json(posts);
   } catch (error) {
@@ -114,7 +117,6 @@ export const likePost = async (req, res) => {
 
 export const commentPost = async (req, res) => {
   const { id } = req.params;
-  //! Check this
   const { comment } = req.body;
   // console.log(comment);
   const post = await PostMessage.findById(id);

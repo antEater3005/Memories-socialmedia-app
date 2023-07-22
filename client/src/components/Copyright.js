@@ -7,10 +7,20 @@ const Copyright = () => {
   return (
     <div className={classes.copyright}>
       <p>
-        &copy; {new Date().getFullYear()} YourWebsite.com. All rights reserved.{' '}
+        &copy; {new Date().getFullYear()}{' '}
+        <a
+          style={{ textDecoration: 'none', fontWeight: 'bold' }}
+          href='https://memories-mern-app2.netlify.app/posts'
+        >
+          Memories.com
+        </a>
+        . All rights reserved.
         <br />
         Create by{' '}
-        <a href='https://github.com/antEater3005/Memories-socialmedia-app'>
+        <a
+          style={{ textDecoration: 'none', fontWeight: 'bold' }}
+          href='https://github.com/antEater3005/Memories-socialmedia-app'
+        >
           Avinash Chaurasiya
         </a>
       </p>

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL || 'http://localhost:5000',
+  baseURL: 'http://localhost:5000' || process.env.REACT_APP_SERVER_URL,
 });
 
 API.interceptors.request.use((req) => {

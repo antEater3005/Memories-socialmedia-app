@@ -6,6 +6,7 @@ import memoriesLogo from '../../images/memoriesLogo.png';
 import memoriesText from '../../images/memoriesText.png';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import { LOGOUT } from '../../constants/actionTypes';
 
 const Navbar = () => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -14,8 +15,8 @@ const Navbar = () => {
   const location = useLocation();
 
   const logout = () => {
-    dispatch({ type: 'LOGOUT' });
-    navigate('/');
+    dispatch({ type: LOGOUT });
+    navigate(0);
     setUser(null);
   };
   useEffect(() => {
